@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skillswapp Deportivo (Beta)</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .bot-section {
+      background-color: #f4f9ff;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    .bot-section h3 {
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    .input-area {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .input-area input {
+      flex-grow: 1;
+      padding: 0.7rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+    .input-area button {
+      padding: 0.7rem 1rem;
+      border: none;
+      border-radius: 10px;
+      background-color: var(--secondary);
+      color: white;
+      cursor: pointer;
+    }
+    .chat-output {
+      background: white;
+      padding: 1rem;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      margin-top: 1rem;
+      min-height: 80px;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>Versión Deportiva (Beta)</h1>
+    <p>Conecta con otros estudiantes que practican tu mismo deporte.</p>
+  </header>
+
+  <main class="container">
+    <section class="features">
+      <h2>🏃 Usuarios con intereses similares:</h2>
+      <div class="grid">
+        <div>
+          <strong>Nombre:</strong> Mateo Ruiz<br>
+          <strong>Deporte:</strong> Fútbol<br>
+          <strong>Ubicación:</strong> Bogotá<br>
+        </div>
+        <div>
+          <strong>Nombre:</strong> Tú<br>
+          <strong>Deporte:</strong> Fútbol<br>
+          <strong>Ubicación:</strong> Medellín<br>
+        </div>
+      </div>
+      <br>
+      <div class="buttons">
+        <button onclick="location.href='chat.html'">Hablar con deportista</button>
+        <button onclick="alert('Función de agenda deportiva en desarrollo')">Ver rutinas</button>
+      </div>
+    </section>
+
+    <section class="features">
+      <h3>🎯 Ideas en desarrollo:</h3>
+      <ul>
+        <li>Subir y compartir rutinas de entrenamiento</li>
+        <li>Desafíos deportivos entre usuarios</li>
+        <li>Calendarios grupales de prácticas</li>
+        <li>Mini campeonatos virtuales</li>
+      </ul>
+    </section>
+
+    <section class="bot-section">
+      <h3>🤖 SkillBot Deportivo (Beta)</h3>
+      <p>Hazle preguntas sobre rutinas, deportes o consejos saludables.</p>
+      <div class="input-area">
+        <input type="text" id="deporteInput" placeholder="¿Qué quieres saber?" />
+        <button onclick="responderBotDeporte()">Preguntar</button>
+      </div>
+      <div class="chat-output" id="outputDeporte">
+        <em>Esperando tu pregunta...</em>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 Skillswapp. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    function responderBotDeporte() {
+      const input = document.getElementById("deporteInput").value.toLowerCase();
+      const output = document.getElementById("outputDeporte");
+
+      let respuesta = "Lo siento, estoy aprendiendo sobre ese tema. ¿Puedes preguntar de otra forma?";
+
+      if (input.includes("fútbol")) {
+        respuesta = "El fútbol mejora la resistencia, el trabajo en equipo y la coordinación. ¿Quieres una rutina de calentamiento?";
+      } else if (input.includes("ejercicio") || input.includes("entrenamiento")) {
+        respuesta = "Para mejorar tu condición física, intenta hacer ejercicios cardiovasculares 3 veces por semana y combina con fuerza.";
+      } else if (input.includes("hidratación") || input.includes("agua")) {
+        respuesta = "Es ideal beber al menos 8 vasos de agua al día y más si haces deporte. ¡Mantente hidratado!";
+      } else if (input.includes("alimentación")) {
+        respuesta = "Una buena alimentación deportiva incluye carbohidratos saludables, proteína y mucha agua. Evita el azúcar procesada.";
+      } else if (input.includes("hola") || input.includes("buenas")) {
+        respuesta = "¡Hola! Soy SkillBot versión deportiva. ¿Sobre qué te gustaría saber hoy?";
+      }
+
+      output.innerHTML = `<strong>SkillBot:</strong> ${respuesta}`;
+    }
+  </script>
+</body>
+<script>
+  async function responderConOpenAI() {
+    const input = document.getElementById("messageInput").value;
+    const output = document.getElementById("chatBox");
+
+    const userMessage = document.createElement("p");
+    userMessage.className = "user";
+    userMessage.innerHTML = `<strong>Tú:</strong> ${input}`;
+    output.appendChild(userMessage);
+    output.scrollTop = output.scrollHeight;
+    document.getElementById("messageInput").value = "";
+
+    const thinking = document.createElement("p");
+    thinking.className = "other";
+    thinking.innerHTML = `<strong>SkillBot:</strong> Pensando...`;
+    output.appendChild(thinking);
+
+    try {
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer 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"
+        },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo",
+          messages: [{ role: "user", content: input }],
+          max_tokens: 150,
+          temperature: 0.7
+        })
+      });
+
+      const data = await response.json();
+      const reply = data.choices[0].message.content;
+
+      thinking.innerHTML = `<strong>SkillBot:</strong> ${reply}`;
+    } catch (error) {
+      thinking.innerHTML = `<strong>SkillBot:</strong> Ocurrió un error al responder.`;
+      console.error(error);
+    }
+
+    output.scrollTop = output.scrollHeight;
+  }
+</script>
+
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registro | Skillswapp</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .form-box {
+      max-width: 600px;
+      margin: 2rem auto;
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    .form-box h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+    }
+    .form-box label {
+      font-weight: bold;
+      display: block;
+      margin: 1rem 0 0.3rem;
+    }
+    .form-box input,
+    .form-box select {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 12px;
+      border: 1px solid var(--gray);
+      background-color: #f2f9ff;
+      margin-bottom: 1rem;
+    }
+    .form-box button {
+      width: 100%;
+      padding: 0.9rem;
+      font-size: 1.1rem;
+      background-color: var(--secondary);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+    .form-box button:hover {
+      background-color: var(--accent);
+      color: var(--text);
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>Registro en Skillswapp</h1>
+    <p>Cuéntanos sobre ti para conectarte con otros estudiantes.</p>
+  </header>
+
+  <main>
+    <form class="form-box" action="match.html">
+      <h2>Crear cuenta</h2>
+
+      <label>Nombre completo:</label>
+      <input type="text" name="nombre" required />
+
+      <label>Correo electrónico:</label>
+      <input type="email" name="correo" required />
+
+      <label>Contraseña:</label>
+      <input type="password" name="clave" required />
+
+      <label>¿Cuál es tu nivel académico?</label>
+      <select name="nivel" required>
+        <option value="">Selecciona uno</option>
+        <option value="preescolar">Preescolar</option>
+        <option value="primaria">Primaria</option>
+        <option value="secundaria">Secundaria</option>
+        <option value="media">Media (10° y 11°)</option>
+        <option value="universidad">Universidad</option>
+      </select>
+
+      <label>¿En qué materias eres bueno/a?</label>
+      <select name="fortalezas" multiple size="5">
+        <option>Matemáticas</option>
+        <option>Lenguaje</option>
+        <option>Inglés</option>
+        <option>Física</option>
+        <option>Programación</option>
+      </select>
+
+      <label>¿En qué materias necesitas ayuda?</label>
+      <select name="debilidades" multiple size="5">
+        <option>Matemáticas</option>
+        <option>Lenguaje</option>
+        <option>Inglés</option>
+        <option>Física</option>
+        <option>Oratoria</option>
+      </select>
+
+      <label>¿Practicas algún deporte?</label>
+      <select name="deporte">
+        <option value="">No</option>
+        <option value="futbol">Fútbol</option>
+        <option value="atletismo">Atletismo</option>
+        <option value="natacion">Natación</option>
+        <option value="patinaje">Patinaje</option>
+        <option value="ajedrez">Ajedrez</option>
+        <option value="otro">Otro</option>
+      </select>
+
+      <button type="submit">Finalizar registro</button>
+    </form>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 Skillswapp. Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>
